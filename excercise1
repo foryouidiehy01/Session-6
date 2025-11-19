@@ -1,0 +1,42 @@
+create database shop;
+use	shop;
+
+create table categories(
+categoriesID int primary key not null,
+categoriesName varchar ( 100 )
+);
+create table products(
+productsID int primary key not null ,
+productsName varchar ( 100 ) ,
+price decimal ( 10 ,2 ),
+categoriesID int not null ,
+foreign key ( categoriesID ) references categories ( categoriesID )
+);
+
+
+insert into categories (categoriesID, categoriesName)
+values
+(1, 'Quần'),
+(2, 'Quần vải'),
+(3, 'Áo');
+
+insert into products 
+values 
+(1,'quần bò','100.00',1),
+(2,'quần vải','200.00',2),
+(3,'áo bò','300.00',3);
+
+update products 
+set price = 150.00
+where productsID = 1;
+
+delete from products
+where productsID = 1;
+
+select  * from products
+order by price desc;
+
+select categoriesID,
+count(productsID) as total_products
+from products 
+group by categoriesID;
